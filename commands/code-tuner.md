@@ -31,12 +31,43 @@ allowed-tools: ["Read", "Write", "Grep", "Glob", "Bash", "Task", "AskUserQuestio
 
 如果用户未指定，询问用户项目状态。
 
+## 前置检查：项目类型验证（强制执行）
+
+在执行任何分析之前，必须先验证目标项目是否为服务端代码项目。
+
+**检测方法：** 在项目根目录扫描以下配置文件是否存在至少一个：
+- `pom.xml`, `build.gradle`, `build.gradle.kts` (Java)
+- `go.mod` (Go)
+- `package.json` (Node.js) — 需含后端框架依赖（express, nestjs, koa, fastify 等）
+- `requirements.txt`, `pyproject.toml`, `setup.py`, `manage.py` (Python)
+- `*.csproj`, `*.sln` (C#/.NET)
+- `Cargo.toml` (Rust)
+- `composer.json` (PHP)
+- `Gemfile` (Ruby)
+
+**如果找不到任何服务端技术栈配置文件：**
+
+直接告知用户并终止，不执行后续任何 Phase：
+
+```
+code-tuner 专为服务端代码（Java/Go/Node.js/Python/.NET/Rust/PHP/Ruby 后端项目）设计。
+
+当前项目未检测到服务端技术栈配置文件，不是 code-tuner 的最佳分析对象。
+
+如需分析此项目，可考虑其他工具。
+```
+
+**不要勉强分析非服务端项目。** 对前端项目、纯 Markdown 项目、配置仓库、文档仓库等，code-tuner 的规则体系不适用，分析结果无意义。
+
+---
+
 ## 执行流程
 
-1. 先用 Read 工具读取 `${CLAUDE_PLUGIN_ROOT}/SKILL.md` 获取完整目标定义和关键原则
-2. 根据模式按需读取对应阶段的详细文档
-3. 按工作流执行
-4. **【强制】执行完毕后，必须在对话中直接输出完整的报告摘要（见下方"报告输出要求"）**
+1. **【强制】执行前置检查**（见上方"项目类型验证"），不通过则终止
+2. 用 Read 工具读取 `${CLAUDE_PLUGIN_ROOT}/SKILL.md` 获取完整目标定义和关键原则
+3. 根据模式按需读取对应阶段的详细文档
+4. 按工作流执行
+5. **【强制】执行完毕后，必须在对话中直接输出完整的报告摘要（见下方"报告输出要求"）**
 
 ## 详细文档（按需用 Read 工具加载）
 
