@@ -10,32 +10,29 @@ claude plugin install /path/to/code-tuner-skill
 
 ## Usage
 
-```bash
-# Full analysis (all phases)
-/code-tuner full --lifecycle pre-launch
-
-# Architecture compliance only
+```
+/code-tuner full
 /code-tuner compliance
-
-# Duplication detection only
 /code-tuner duplication
-
-# Abstraction analysis only
 /code-tuner abstraction
-
-# Regenerate report from existing phase outputs
 /code-tuner report
 ```
 
 Or use natural language:
 
 ```
+请用 code-tuner 分析我的项目。项目路径是 /path/to/project。项目状态是未上线。
 please use code-tuner to analyze my project at /path/to/project. It's pre-launch.
 ```
 
-## Design
+Modes:
+- **full** — Phase 0 → 1 → 2 → 3 → 4 (default)
+- **compliance** — Architecture compliance only
+- **duplication** — Duplication detection only
+- **abstraction** — Abstraction analysis only
+- **report** — Regenerate report from existing phase outputs
 
-See [design doc](../docs/plans/2026-02-17-code-tuner-design.md) and [implementation plan](../docs/plans/2026-02-17-code-tuner-implementation.md).
+Lifecycle is asked interactively if not specified (pre-launch or maintenance).
 
 ## License
 
