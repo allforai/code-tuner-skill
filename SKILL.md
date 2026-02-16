@@ -4,21 +4,14 @@ description: >
   This skill should be used when the user asks to "analyze server code quality",
   "check architecture compliance", "find duplicate code", "detect code duplication",
   "review backend architecture", "optimize server code", "code tuning",
-  "check if code follows three-tier architecture", "check DDD compliance",
-  "find abstraction opportunities", "analyze validation logic",
+  "refactor my backend", "audit code architecture", "code quality review",
+  "assess technical debt", "check if code follows three-tier architecture",
+  "check DDD compliance", "find abstraction opportunities", "analyze validation logic",
   or mentions server-side code optimization, backend refactoring,
-  architectural violations, or layered architecture review.
+  architectural violations, layered architecture review, or technical debt assessment.
   Supports three-tier, two-tier, and DDD architectures across any language.
-  服务端代码调优，架构合规检查，重复代码检测，抽象机会分析，验证逻辑规范。
-license: MIT
-compatibility: claude-code, opencode, codex
-metadata:
-  version: "1.0.0"
-  author: David
-  audience: backend-developers, fullstack-developers, tech-leads
-  workflow: profile → compliance → duplication → abstraction → report
-  languages: zh-CN, en
-  tags: architecture, refactoring, duplication, validation, code-quality, backend
+  服务端代码调优，架构合规检查，重复代码检测，抽象机会分析，验证逻辑规范，技术债评估。
+version: "1.0.0"
 ---
 
 # Code-Tuner — 服务端代码调优
@@ -45,25 +38,6 @@ metadata:
 | 架构违规 | 标记为 `MUST-FIX` | 标记为 `TECH-DEBT`，附风险评估 |
 | 重复代码 | 建议合并到一处 | 建议抽取共用方法，保留原调用点 |
 | 任务排序 | 按代码质量影响（大的先做） | 按变更风险（安全的先做） |
-
----
-
-## 快速开始
-
-**完整分析：**
-```
-请用 code-tuner 技能分析我的项目。项目路径是 /path/to/project。项目状态是未上线。
-```
-
-**维护期项目：**
-```
-请用 code-tuner 分析我的项目。项目路径是 /path/to/project。项目状态是维护期。
-```
-
-**只跑某个阶段：**
-```
-请用 code-tuner 只做重复检测。项目路径是 /path/to/project。
-```
 
 ---
 
